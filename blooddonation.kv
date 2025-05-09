@@ -1,0 +1,322 @@
+#:import Window kivy.core.window.Window
+
+ScreenManager:
+    LoginScreen:
+    RegistrationScreen:
+    TermsScreen:
+    ProfileScreen:
+    DonationHistoryScreen:
+    ForgotPasswordScreen:
+    ResetPasswordScreen:
+
+<LoginScreen>:
+    name: 'login'
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: "20dp"
+        
+        MDCard:
+            size_hint: None, None
+            size: Window.width - dp(40), Window.height - dp(40)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            padding: "20dp"
+            spacing: "20dp"
+            orientation: 'vertical'
+
+            Image:
+                source: 'IMG-20250506-WA0001.jpg'
+                size_hint: None, None
+                size: 120, 120
+                pos_hint: {'center_x': 0.5}
+
+            MDLabel:
+                text: 'Blood Donation App'
+                font_style: 'H5'
+                halign: 'center'
+                size_hint_y: None
+                height: self.texture_size[1]
+                padding_y: 15
+
+            MDTextField:
+                id: username
+                hint_text: "Username"
+                icon_right: "account"
+                size_hint_x: 0.9
+                pos_hint: {'center_x': .5}
+
+            MDTextField:
+                id: password
+                hint_text: "Password"
+                icon_right: "eye-off"
+                password: True
+                size_hint_x: 0.9
+                pos_hint: {'center_x': .5}
+                on_icon_right: app.toggle_password_visibility(self)
+
+            MDRaisedButton:
+                text: "LOG IN"
+                size_hint_x: 0.8
+                pos_hint: {'center_x': .5}
+                on_release: app.login()
+
+            MDTextButton:
+                text: "Register"
+                pos_hint: {'center_x': .5}
+                on_release: root.manager.current = 'registration'
+
+            MDTextButton:
+                text: "Forgot Password?"
+                pos_hint: {'center_x': .5}
+                on_release: root.manager.current = 'forgot_password'
+
+<RegistrationScreen>:
+    name: 'registration'
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: "20dp"
+        
+        MDCard:
+            size_hint: None, None
+            size: Window.width - dp(40), Window.height - dp(40)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            padding: "20dp"
+            spacing: "20dp"
+            orientation: 'vertical'
+
+            MDIconButton:
+                icon: "arrow-left"
+                pos_hint: {'center_x': .1}
+                on_release: root.manager.current = 'login'
+
+            MDLabel:
+                text: 'Register'
+                font_style: 'H5'
+                halign: 'center'
+                size_hint_y: None
+                height: self.texture_size[1]
+
+            MDTextField:
+                id: reg_full_name
+                hint_text: "Full Name"
+                size_hint_x: 0.9
+                pos_hint: {'center_x': .5}
+
+            MDTextField:
+                id: reg_username
+                hint_text: "Username"
+                icon_right: "account"
+                size_hint_x: 0.9
+                pos_hint: {'center_x': .5}
+                helper_text: "Enter your username"
+                helper_text_mode: "on_focus"
+
+            MDTextField:
+                id: reg_email
+                hint_text: "Email"
+                icon_right: "email"
+                size_hint_x: 0.9
+                pos_hint: {'center_x': .5}
+                helper_text: "Enter your email"
+                helper_text_mode: "on_focus"
+
+            MDTextField:
+                id: reg_phone
+                hint_text: "Phone"
+                size_hint_x: 0.9
+                pos_hint: {'center_x': .5}
+
+            MDTextField:
+                id: reg_dob
+                hint_text: "Date of Birth"
+                size_hint_x: 0.9
+                pos_hint: {'center_x': .5}
+
+            MDTextField:
+                id: reg_password
+                hint_text: "Password"
+                icon_right: "eye-off"
+                password: True
+                size_hint_x: 0.9
+                pos_hint: {'center_x': .5}
+                helper_text: "At least 8 characters"
+                helper_text_mode: "on_focus"
+                on_icon_right: app.toggle_password_visibility(self)
+
+            MDTextField:
+                id: reg_confirm_password
+                hint_text: "Confirm Password"
+                icon_right: "eye-off"
+                password: True
+                size_hint_x: 0.9
+                pos_hint: {'center_x': .5}
+                helper_text: "Re-enter your password"
+                helper_text_mode: "on_focus"
+                on_icon_right: app.toggle_password_visibility(self)
+
+            MDRaisedButton:
+                text: "REGISTER"
+                size_hint_x: 0.8
+                pos_hint: {'center_x': .5}
+                on_release: app.register()
+
+            MDTextButton:
+                text: "Already have an account? Login"
+                pos_hint: {'center_x': .5}
+                on_release: root.manager.current = 'login'
+
+<ProfileScreen>:
+    name: 'profile'
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 20
+
+        MDTopAppBar:
+            title: "Profile"
+            elevation: 4
+
+        MDCard:
+            orientation: 'vertical'
+            padding: 20
+            spacing: 10
+            size_hint: None, None
+            size: "280dp", "220dp"
+            pos_hint: {"center_x": .5, "center_y": .7}
+
+            MDLabel:
+                text: "John Doe"
+                font_style: "H6"
+                size_hint_y: None
+                height: self.texture_size[1]
+
+            MDLabel:
+                text: "Donations: 5"
+                size_hint_y: None
+                height: self.texture_size[1]
+
+            MDTextField:
+                id: charge_amount
+                hint_text: "Set Donation Price (Max 2000 INR)"
+                helper_text: "10% Service Fee Deducted"
+                helper_text_mode: "on_focus"
+                input_filter: 'int'
+                max_text_length: 4
+
+            MDRaisedButton:
+                text: "Confirm Donation"
+                size_hint_x: 0.5
+                pos_hint: {'center_x': .5}
+                on_release: app.confirm_donation()
+
+        MDRaisedButton:
+            text: "View Donation History"
+            size_hint_x: 0.8
+            pos_hint: {'center_x': .5}
+            on_release: root.manager.current = 'donation_history'
+
+<DonationHistoryScreen>:
+    name: 'donation_history'
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 20
+
+        MDTopAppBar:
+            title: "Donation History"
+            elevation: 4
+
+        MDScrollView:
+            MDList:
+                id: history_list
+
+        MDRaisedButton:
+            text: "Back to Profile"
+            size_hint_x: 0.8
+            pos_hint: {'center_x': .5}
+            on_release: root.manager.current = 'profile'
+
+<ForgotPasswordScreen>:
+    name: 'forgot_password'
+    MDCard:
+        size_hint: None, None
+        size: 300, 400
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        padding: 25
+        spacing: 25
+        orientation: 'vertical'
+
+        MDLabel:
+            text: 'Reset Password'
+            font_style: 'H5'
+            halign: 'center'
+            size_hint_y: None
+            height: self.texture_size[1]
+            padding_y: 15
+
+        MDTextField:
+            id: email
+            hint_text: "Email"
+            icon_right: "email"
+            helper_text: "Enter your registered email"
+            helper_text_mode: "on_focus"
+
+        MDRaisedButton:
+            text: "SEND RESET CODE"
+            size_hint_x: 1
+            on_release: app.send_reset_link()
+
+        MDTextButton:
+            text: "Back to Login"
+            pos_hint: {'center_x': .5}
+            on_release: root.manager.current = 'login'
+
+<ResetPasswordScreen>:
+    name: 'reset_password'
+    MDCard:
+        size_hint: None, None
+        size: 300, 500
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        padding: 25
+        spacing: 25
+        orientation: 'vertical'
+
+        MDLabel:
+            text: 'Enter Reset Code'
+            font_style: 'H5'
+            halign: 'center'
+            size_hint_y: None
+            height: self.texture_size[1]
+            padding_y: 15
+
+        MDTextField:
+            id: reset_code
+            hint_text: "Reset Code"
+            icon_right: "key"
+            helper_text: "Enter the 6-digit code sent to your email"
+            helper_text_mode: "on_focus"
+
+        MDTextField:
+            id: new_password
+            hint_text: "New Password"
+            icon_right: "eye-off"
+            password: True
+            helper_text: "At least 8 characters"
+            helper_text_mode: "on_focus"
+            on_icon_right: app.toggle_password_visibility(self)
+
+        MDTextField:
+            id: confirm_password
+            hint_text: "Confirm Password"
+            icon_right: "eye-off"
+            password: True
+            helper_text: "Re-enter your new password"
+            helper_text_mode: "on_focus"
+            on_icon_right: app.toggle_password_visibility(self)
+
+        MDRaisedButton:
+            text: "RESET PASSWORD"
+            size_hint_x: 1
+            on_release: app.reset_password()
+
+        MDTextButton:
+            text: "Back"
+            pos_hint: {'center_x': .5}
+            on_release: root.manager.current = 'forgot_password' 
