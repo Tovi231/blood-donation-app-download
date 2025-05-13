@@ -2,32 +2,45 @@
 
 A KivyMD-based application for managing blood donations.
 
-## Setup Instructions
+## Features
 
-1. Create a virtual environment (recommended):
-```bash
-python -m venv venv
-```
-2. Activate the virtual environment:
-- Windows:
-```bash
-venv\Scripts\activate
-```
-3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
+- User registration and login
+- Password reset functionality
+- Donation management
+- Donation history tracking
+- Profile management
 
-## Running the Application
+## Setup
 
-1. Make sure your virtual environment is activated
+1. Install Python 3.7 or higher
+2. Install the required dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
+
+## Running the App
+
+1. Make sure you have all the required files:
+   - main.py
+   - blooddonation.kv
+   - IMG-20250506-WA0001.jpg (app icon)
+   - requirements.txt
+
 2. Run the application:
-```bash
-python app.py
-```
+   ```
+   python main.py
+   ```
 
-## Project Structure
+## Database
 
-- `app.py` - Main application code
-- `blooddonation.kv` - Kivy language file for UI
-- `requirements.txt` - Project dependencies 
+The app uses SQLite for data storage. The database file (blood_donation.db) will be created automatically when you first run the application.
+
+## Note
+
+This is a demo application. In a production environment, you would need to:
+- Implement proper password hashing
+- Add email verification
+- Implement secure payment processing
+- Add proper error handling
+- Add data validation
+- Implement proper session management 

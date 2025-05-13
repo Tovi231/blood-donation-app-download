@@ -1,3 +1,5 @@
 kivy==2.2.1
 kivymd==1.1.1
-pillow==10.0.0 
+pillow==10.0.0
+flask==2.0.1
+flask-cors==3.0.10 
